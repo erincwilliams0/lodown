@@ -180,7 +180,9 @@ module.exports.indexOf = indexOf;
 module.exports.contains = contains;
 
 /**
+ * unique: Takes in an array and returns the array with all duplicate values removed.
  * 
+ * @param {Array} arr: An array to loop through checking for duplicate values.
  * 
- * 
+ * @return {Array}: Returns an array with all duplicate values removed.
  */
