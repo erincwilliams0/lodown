@@ -99,3 +99,88 @@ module.exports.typeOf = typeOf;
      return output;
  }
  module.exports.first = first;
+
+ /**
+  * last: Takes in an array and a number of elements to be returned starting from the end of our array.
+  * Does not return the array elements in reverse order of input array.
+  * 
+  * @param {Array} arr: An array of elements to be returned, starting from the end of the array. If no
+  * array is given than an empty array is returned.
+  * @param {Number} num: A number indicating how many elements to be returned. If no number is given 
+  * then only the last element will be returned. If the number is negative an empty array will be 
+  * returned and if the number exceeds the array length then the entire array will be returned
+  * 
+  * @return {Value or Array}: the last element of the input array is returned. If number parameter is 
+  * greater than one then that amount will be returned from the array starting at the end of the array. 
+  * While this function starts its return from the last values of the array it does not return these 
+  * elements in a different order. Lastly If no array is passed in or the number is a negative integer
+  * then an empty array will be returned.
+  */
+  function last(arr, num){
+    // create output array
+    var output = [];
+    //test arr and num parameters, if arr is not an array or num is a negative number return [], if num is undefined or nan return last index of arr, if num > arr.length return arr
+    if(!Array.isArray(arr) || num < 0) {
+        return [];
+    } else if(num === undefined || num === NaN) {
+        return arr[arr.length - 1];
+    } else {
+    // otherwise loop through arr backwards then using unshift input each index while num > 0
+    for(let i = arr.length - 1; i >= 0; i--) {
+        if(num > 0) {
+            output.unshift(arr[i]);
+            num--;
+        }
+
+    }
+    }
+    return output;
+}
+module.exports.last = last;
+
+/**
+ * indexOf: Takes in an array and a value and returns the index where value first Occurs in the array. 
+ * 
+ * @param {Array} arr: The array in which we look for the given value. If the array does not contain
+ * the input value than negative one is returned.
+ * @param {Value} value: The value searched for in the array.
+ * 
+ * @return {Number}: The index where the value was located inside the array. If the value is not 
+ * contained inside the array than negative one will be returned instead.
+ */
+ function indexOf(arr, value){
+    //for loop through arr, test each index === value, return value when found,  return -1 outside loop if value is not found
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] === value) {
+            return i;
+        }
+    }
+    return -1;
+};
+module.exports.indexOf = indexOf;
+
+/**
+ * contains: Takes an array and a value and returns true if the array contains value, returns false
+ * otherwise.
+ * 
+ * @param {Array} arr: The array tested to determine whether it contains a value.
+ * @param {Value} value: The value searched for in the array. If no value is given then a false
+ * boolean is returned
+ * 
+ * @return {Boolean}: If the array is determined to contain the value then the function returns true. 
+ * Returns false if the value is not contained in the array, or if no value is given.
+ */
+ function contains(arr, value){
+    // using ternary operator test if arr includes value, return true or false
+    if(value === undefined) {
+        return false;
+    }
+    return arr.includes(value) ? true : false;   
+}
+module.exports.contains = contains;
+
+/**
+ * 
+ * 
+ * 
+ */
