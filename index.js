@@ -186,3 +186,104 @@ module.exports.contains = contains;
  * 
  * @return {Array}: Returns an array with all duplicate values removed.
  */
+ function unique(arr){
+    // create variable to hold output
+    var output = [];
+    // loop through arr, test if output includes arr[i], if not push array value to output
+    for(let i = 0; i < arr.length; i++) {
+        if(!output.includes(arr[i])) {
+            output.push(arr[i])
+        }
+    }
+    return output;
+}
+module.exports.unique = unique;
+
+/**
+ * filter: Takes in an Array and a test function to call on each value in the
+ * Array. The test function returns a Boolean value, either true or false. The value's that pass the
+ * function test are passed in to a new array to be returned.
+ * 
+ * @param {Array} arr: The array to filter through.
+ * @param {function} action: The test to determine what values get filtered.
+ * 
+ * @return {Array}: Returns an array of all the values that passed the test function.
+ */
+ function filter(arr, action){
+    // create output array
+    var output = [];
+    // loop through arr, test calling action on arr passing parameters arr[i], i, arr,
+    for(let i = 0; i < arr.length; i++) { 
+    //if true push to output arr
+     if(action(arr[i], i, arr)) {
+         output.push(arr[i])
+     }
+    }
+    //return output
+    return output;
+ }
+ module.exports.filter = filter;
+
+ /**
+  * reject: Takes in an array and a test function. The test function is called on each value in the
+  * array and returns a boolean value, either true or false. The values that do not pass the test 
+  * are passed into a new array to be returned.
+  * 
+  * @param {Array} arr: An array of values to filter through.
+  * @param {function} action: A test function to call on the array's values and return a boolean.
+  * 
+  * @return {Array}: Returns all the values that did not pass the test function. This function
+  * works as an inverse to filter.
+  */
+  function reject(arr, action){
+    // copy exact same code for filter but add a bang operator in the conditional statement
+     // create output array
+   var output = [];
+   // loop through arr, test calling action on arr passing parameters arr[i], i, arr,
+   for(let i = 0; i < arr.length; i++) { 
+   //if true push to output arr
+    if(!action(arr[i], i, arr)) {
+        output.push(arr[i])
+    }
+   }
+   //return output
+   return output;
+}
+module.exports.reject = reject;
+
+/**
+ * partition: Takes in an array and a test function. The test function is called on each value in the
+ * array and returns a boolean. Each value is passed into one of two nested arrays inside an array. 
+ * The values that return true are passed into the zero index array, and the values that returned false
+ * are passed into the one index array.
+ * 
+ * @param {Array} arr: A collection of values.
+ * @param {function} action: A test function that returns a boolean when called on each value in the
+ * array.
+ * 
+ * @return {Array}: returns an array with two nested arrays inside. each value is put into one of the
+ * nested arrays depending on whether they pass or fail the test function.
+ */
+function partition(arr, action){
+    // create an output array with two nested arrays inside
+    var output = [[],[]]
+    // loop through array, test arr by calling action(arr[i], i, arr)
+    for(let i = 0; i < arr.length; i++) {
+    //if true push arr[i] into output[0]
+    //if not push arr[i] into output[1]
+        if(action(arr[i], i, arr)) {
+            output[0].push(arr[i])
+        } else {
+            output[1].push(arr[i])
+        }
+    }
+    // return output;
+    return output;
+}
+module.exports.partition = partition;
+
+/**
+ * map:
+ * 
+ * 
+ */
