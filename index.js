@@ -4,7 +4,7 @@
 
 /**
  * each: Designed to loop over a collection, Array or Object, and applies the 
- * action Function to each value in the collection.
+ * action Function to each value in the collection. 
  * 
  * @param {Array or Object} collection: The collection over which to iterate.
  * @param {Function} action: The Function to be applied to each value in the 
@@ -22,3 +22,21 @@ function each(collection, action) {
     }
 }
 module.exports.each = each;
+
+/**
+ * identity: Returns a value
+ * 
+ * @param {Value} value: The value that is returned by the function.
+ * @return {Value}: the given value that the function returns.
+ */
+ _.identity = function(value) {
+    return value;
+}
+module.exports.identity = identity; 
+
+/**
+ * typeOf: takes in a value and returns a string indicating the values type.
+ * 
+ * @param {Value} value: any primitive or complex value type
+ * 
+ */
