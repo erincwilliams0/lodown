@@ -283,7 +283,56 @@ function partition(arr, action){
 module.exports.partition = partition;
 
 /**
- * map:
+ * map: Takes in an Object or Array and a function. The function is called on each element in the
+ * collection. Then a new collection is created with the values returned from the function.
+ * 
+ * @param {Array or Object} collection: The array or object containging values to pass to the function.
+ * @param {function} action: A function that performs an operation on a value then returns the new value.
+ * 
+ * @return {Array or Object}: An array or Object containing the new values returned from the function.
+ */
+ function map(collect, action){
+    // output array
+    var output = [];
+    // test collection for array or object
+    if(Array.isArray(collect)) {
+    // push the result of calling action on collection to output
+        for(let i = 0; i < collect.length; i++) {
+            output.push(action(collect[i], i, collect))
+        }
+    } else if(collect instanceof Object) {
+        for(var key in collect) {
+            output.push(action(collect[key], key, collect))
+        }
+    }
+    // return output
+    return output;
+}
+module.exports.map = map;
+
+/**
+ * pluck: Takes in an array of nested objects and a property representing a key. Searches through each 
+ * object for the propety, if found the property value is passed into an array.
+ * 
+ * @param {Array} arr: An array of objects.
+ * @param {String} prop: a string representing a key.
+ * 
+ * @return {Array}: Returns an array of values that were assigned to the input key contained in every
+ * object in the array.
+ */
+function pluck(arr, prop){
+    //output array
+    var output = [];
+    //loop through arr, push the value of prop to output for each iteration through array
+    for(let i = 0; i < arr.length; i++) {
+        output.push(arr[i][prop])
+    } 
+    return output;
+}
+module.exports.pluck = pluck;
+
+/**
+ * 
  * 
  * 
  */
