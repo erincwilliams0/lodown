@@ -444,7 +444,22 @@ module.exports.some = some;
 module.exports.reduce = reduce;
 
 /**
+ * extend: Takes in multiple objects and passes all the key value pairs into a single object.
+ * If a property already exist it is reassigned to last key/value pair passed in.
  * 
+ * @param {Objects} ...inputs: Any number of objects.
  * 
- * 
+ * @return {Object}: a single object containing properties from each object passed into the function.
  */
+function extend(...inputs){
+    var output = inputs[0]
+    // loop through inputs, then for in loop through current index in inputs, assign for each key in index assign property to output object; return object
+    for(let i = 0; i < inputs.length; i++){
+        for(let key in inputs[i]){
+            output[key] = inputs[i][key]
+        }
+        
+    } 
+    return output;
+}
+module.exports.extend = extend;
