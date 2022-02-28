@@ -332,6 +332,118 @@ function pluck(arr, prop){
 module.exports.pluck = pluck;
 
 /**
+ * every: Takes in an array or object and a test function that returns a boolean. The test function
+ * is called on every element but only returns true if all values pass the test, if any values do not
+ * pass then a false boolean is returned.
+ * 
+ * @param {Array or Object} collect: The Array or Object containing values to be passed to a function.
+ * @param {function} action: A test function that returns the boolean false if any values do not pass.
+ * 
+ * @return {Boolean}: If any values passed into the test function do not pass than the function returns 
+ * false. If all values pass the function then the function returns true.
+ */
+function every(collect, action){
+    //create variable to hold true output
+    var output = true;
+    // determine if collect is an array or object, loop through collect testing action on collect, if test results in false return false, else return output
+    // determine if action is not a function, if not then determine each iteration if collect is truthy/falsy
+    if(Array.isArray(collect)) {
+        for(let i = 0; i < collect.length; i++) {
+        if(!action){
+            if(!collect[i]){
+                return false;
+            }
+        } else if(!action(collect[i], i, collect)){
+            return false;
+        }
+    }
+    } else if(collect instanceof Object) {
+     for(let key in collect){
+        if(!action){
+           if(!collect[key]){
+            return false;
+           }
+       } else if(!action(collect[key], key, collect)){
+        return false;
+       }
+    }
+}
+    return output;
+}
+module.exports.every = every;
+
+/**
+ * some: Takes in an array or object and a function test. The function is called on each value,
+ * the first value that equates to true returns true. Only when each value passed to the test function 
+ * equates to false, then false will be returned.
+ *  
+ * @param {Array or Object} collect: Stores values to be passed to the test function.
+ * @param {function} action: A test function that will return true on the first occurance of a value 
+ * equating to true.
+ * 
+ * @return {Boolean}: The test function will exit the entire function and return true on the first passed
+ * occurance
+ */
+function some(collect, action){
+    //determine if collect is an array or object, loop through collect calling action to test each iteration, 1st true result return true; else return false outside loops
+    if(Array.isArray(collect)) {
+        for(let i = 0; i < collect.length; i++){
+            if(!action){
+                if(collect[i]){
+                    return true;
+                }
+            } else if(action(collect[i], i, collect)){
+                return true;
+            }
+        }
+    } else if(collect instanceof Object){
+        for(let key in collect){
+        if(!action){
+            if(collect[key]){
+                return true;
+            }
+        } else if(action(collect[key], key, collect)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+module.exports.some = some;
+
+/**
+ * reduce: Takes in an Array, a function, and a seed. The function is called on each element in the 
+ * array, then returns a value that is passed to the function when called on the following element.
+ * The first time the function is called there is no returned value from the previous element, if a seed
+ * is passed then that's the value that will be used. If no seed value is passed in then the zero index of
+ * the array is used as the seed value and the function is called on the value in the first index.
+ * 
+ * @param {Array} arr: An array of values to be reduced.
+ * @param {function} action: a function that returns a value to be passed in on the subsequent function
+ * call.
+ * @param {seed} seed: a value to be passed in to the function when calling on the zero index of the
+ * array. 
+ * 
+ * @return {value}: Returns the reduced value which can be of a primitive or a complex data type.
+ */
+ function reduce(arr, action, seed){
+    //console.log(seed);
+    //console.log(action)
+   if(seed === undefined) {
+       seed = arr[0];
+       for(let i = 1; i < arr.length; i++){
+           seed = action(seed, arr[i], i);
+       }
+   } else {
+       for(let i = 0; i < arr.length; i++){
+           seed = action(seed, arr[i], i)
+       }
+   }
+    return seed;
+}
+module.exports.reduce = reduce;
+
+/**
  * 
  * 
  * 
