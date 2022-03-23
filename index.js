@@ -261,8 +261,8 @@ module.exports.reject = reject;
  * @param {function} action: A test function that returns a boolean when called on each value in the
  * array.
  * 
- * @return {Array}: returns an array with two nested arrays inside. each value is put into one of the
- * nested arrays depending on whether they pass or fail the test function.
+ * @return {Array}: returns an array with two nested arrays inside. Each value that evaluates to true
+ * is pushed into the first nested array, those that evaluate to false are pushed into the second nested array.
  */
 function partition(arr, action){
     // create an output array with two nested arrays inside
